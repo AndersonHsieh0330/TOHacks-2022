@@ -2,6 +2,26 @@
   text-align: center;
   overflow: hidden;
   background-color: #f6eee7;
-
 }
 
+/* used in idea submission pages */
+.OnWhatDayWouldIDoWhat {
+  margin-top: 10vh;
+  margin-left: 26vw;
+  width: 25vw;
+}
+.OnWhatDayWouldUDoWhat {
+  margin-top: 10vh;
+  margin-left: 26vw;
+  width: 25vw;
+}
+
+.ActivitySuggestionText {
+  padding: 15px;
+  margin-top: 10vh;
+  margin-left: 26vw;
+  border-radius: 10px;
+  border: 2px solid #dab692;
+  color: black;
+  background-color: #dab69240;
+}

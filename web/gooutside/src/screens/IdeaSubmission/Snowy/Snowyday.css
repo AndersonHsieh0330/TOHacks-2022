@@ -1,0 +1,16 @@
+#SnowyContainer {
+  width: 100%;
+  height: min-content;
+  margin-top: 50px;
+  background-color: #f6eee7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#SnowyDayBackground {
+  /* image is not cropped properly lol */
+  margin: -15px;
+  margin-top: -25vh;
+  width: 100vw;
+}

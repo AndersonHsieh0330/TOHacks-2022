@@ -1,0 +1,16 @@
+#NighttimeContainer {
+  width: 100%;
+  height: min-content;
+  margin-top: 50px;
+  background-color: #f6eee7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#TelescopeBackground {
+  margin-top: 20vh;
+  width: 30vw;
+  margin-top: -5vh;
+  margin-left: 20vw;
+}

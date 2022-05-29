@@ -1,0 +1,16 @@
+#SunnyContainer {
+  width: 100%;
+  height: min-content;
+  margin-top: 50px;
+  background-color: #f6eee7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+#SunnyDayBackground {
+  margin-top: -35vh;
+
+  width: 100vw;
+}
