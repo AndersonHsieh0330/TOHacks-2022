@@ -1,14 +1,18 @@
 # Use the official lightweight Python image.
 # https://hub.docker.com/_/python
-FROM python:3.10-slim
+FROM python:3.7-slim
 
 # Allow statements and log messages to immediately appear in the Knative logs
 ENV PYTHONUNBUFFERED True
 
 # Copy local code to the container image.
-ENV APP_HOME /app
-WORKDIR $APP_HOME
-COPY . ./
+COPY . /app
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y
+
+#fix dumb psygopc error
+RUN apt-get install -y libpq-dev python-dev
 
 # Install production dependencies.
 RUN pip install --no-cache-dir -r requirements.txt
@@ -18,4 +22,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # For environments with multiple CPU cores, increase the number of workers
 # to be equal to the cores available.
 # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
+
+RUN apt-get install -y curl
+
+RUN curl --create-dirs -o $HOME/.postgresql/root.crt -O https://cockroachlabs.cloud/clusters/e78cf822-b40d-40eb-a762-bac2c38c48a1/cert
+
+ENV PORT 8080
+
 CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app

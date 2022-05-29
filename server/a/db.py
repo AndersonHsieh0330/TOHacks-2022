@@ -84,73 +84,78 @@ def clear_activities(conn):
         conn.commit()
 
 
-def main():
-    opt = parse_cmdline()
-    logging.basicConfig(level=logging.DEBUG if opt.verbose else logging.INFO)
-    try:
-        # Attempt to connect to cluster with connection string provided to
-        # script. By default, this script uses the value saved to the
-        # DATABASE_URL environment variable.
-        # For information on supported connection string formats, see
-        # https://www.cockroachlabs.com/docs/stable/connect-to-the-database.html.
-        db_url = opt.dsn
-        conn = psycopg2.connect(db_url)
-    except Exception as e:
-        logging.fatal("database connection failed")
-        logging.fatal(e)
-        return
+# def main():
+#     opt = parse_cmdline()
+#     logging.basicConfig(level=logging.DEBUG if opt.verbose else logging.INFO)
+#     try:
+#         # Attempt to connect to cluster with connection string provided to
+#         # script. By default, this script uses the value saved to the
+#         # DATABASE_URL environment variable.
+#         # For information on supported connection string formats, see
+#         # https://www.cockroachlabs.com/docs/stable/connect-to-the-database.html.
+#         db_url = opt.dsn
+#         conn = psycopg2.connect(db_url)
+#     except Exception as e:
+#         logging.fatal("database connection failed")
+#         logging.fatal(e)
+#         return
 
 
-    init_db(conn)
-    print_activities(conn)
+#     init_db(conn)
+#     print_activities(conn)
 
-    delete_activity(conn, "Not Hiking")
-    print_activities(conn)
+#     delete_activity(conn, "Not Hiking")
+#     print_activities(conn)
 
-    insert_activity(
-        conn, {
-            'activity': 'Helicoptering', 'category': 'Blizzard'})
-    print_activities(conn)
+#     insert_activity(
+#         conn, {
+#             'activity': 'Helicoptering', 'category': 'Blizzard'})
+#     print_activities(conn)
 
-    return_activity(conn, "Blizzard")
+#     return_activity(conn, "Blizzard")
 
-    print_activities(conn)
+#     print_activities(conn)
 
-    clear_activities(conn)
-    # try:
-    #     print_activities(conn)
-    # except ValueError as ve:
-    #     # Below, we print the error and continue on so this example is easy to
-    #     # run (and run, and run...).  In real code you should handle this error
-    #     # and any others thrown by the database interaction.
-    #     logging.debug("print_activities(conn) failed: %s", ve)
+#     clear_activities(conn)
+#     # try:
+#     #     print_activities(conn)
+#     # except ValueError as ve:
+#     #     # Below, we print the error and continue on so this example is easy to
+#     #     # run (and run, and run...).  In real code you should handle this error
+#     #     # and any others thrown by the database interaction.
+#     #     logging.debug("print_activities(conn) failed: %s", ve)
 
-    # Close communication with the database.
-    conn.close()
+#     # Close communication with the database.
+#     conn.close()
 
 
-def parse_cmdline():
-    parser = ArgumentParser(description=__doc__,
-                            formatter_class=RawTextHelpFormatter)
+# def parse_cmdline():
+#     parser = ArgumentParser(description=__doc__,
+#                             formatter_class=RawTextHelpFormatter)
 
-    parser.add_argument("-v", "--verbose",
-                        action="store_true", help="print debug info")
+#     parser.add_argument("-v", "--verbose",
+#                         action="store_true", help="print debug info")
 
-    parser.add_argument(
-        "dsn",
-        default=os.environ.get("DATABASE_URL"),
-        nargs="?",
-        help="""\
-database connection string\
- (default: value of the DATABASE_URL environment variable)
-            """,
-    )
+#     parser.add_argument(
+#         "dsn",
+#         #default=os.environ.get("DATABASE_URL"),
+#         default="postgresql://go-outside:xG_I9M5Y5H7Nzpyj0IMeWg@free-tier9.gcp-us-west2.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dgo-outside-db-559",
+#         nargs="?",
+#         help="""\
+# database connection string\
+#  (default: value of the DATABASE_URL environment variable)
+#             """,
+#     )
 
-    opt = parser.parse_args()
-    if opt.dsn is None:
-        parser.error("database connection string not set")
-    return opt
+#     opt = parser.parse_args()
+#     if opt.dsn is None:
+#         parser.error("database connection string not set")
+
+#     print(opt)
+#     print(type(opt))
+#     return opt
 
 
 if __name__ == "__main__":
-    main()
+    pass
+    #main()
