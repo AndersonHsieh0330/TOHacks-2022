@@ -54,8 +54,7 @@ def placeholder():
 
         jresult = {
             'activity': result[0],
-            'location': result[1],
-            'transportation': result[2]
+            'category': result[1]
         }
 
         return jresult
