@@ -8,12 +8,19 @@
 .OnWhatDayWouldIDoWhat {
   margin-top: 10vh;
   margin-left: 26vw;
-  width: 25vw;
+  height: 4vh;
 }
 .OnWhatDayWouldUDoWhat {
   margin-top: 10vh;
   margin-left: 26vw;
-  width: 25vw;
+  height: 4vh;
+}
+
+.OnWhatDayWouldUDoWhatPlaceHolder {
+  margin-top: 10vh;
+  margin-left: 26vw;
+  height: 4vh;
+  opacity: 0;
 }
 
 .ActivitySuggestionText {
@@ -24,4 +31,14 @@
   border: 2px solid #dab692;
   color: black;
   background-color: #dab69240;
+}
+
+.ActivitySuggestionTextPlaceHolder {
+  padding: 15px;
+  margin-top: 10vh;
+  margin-left: 26vw;
+  border-radius: 10px;
+  border: 2px solid #00000000;
+  color: transparent;
+  background-color: transparent;
 }

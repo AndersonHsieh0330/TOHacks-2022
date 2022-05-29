@@ -8,6 +8,8 @@ import os
 from argparse import ArgumentParser, RawTextHelpFormatter
 import a.db
 from dotenv import load_dotenv
+from flask_cors import CORS, cross_origin
+
 
 import psycopg2
 from psycopg2.errors import SerializationFailure
@@ -15,6 +17,7 @@ from psycopg2.errors import SerializationFailure
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 opt = a.db.parse_cmdline()
 logging.basicConfig(level=logging.DEBUG if opt.verbose else logging.INFO)
@@ -33,14 +36,16 @@ except Exception as e:
 
 
 @app.route("/")
+@cross_origin()
 def index():
     pass
 
 @app.route("/api/activity", methods=["GET", "POST"])
+@cross_origin()
 def placeholder():
     if flask.request.method == "POST":
-        activity = flask.request.json['activity']
-        category = flask.request.json['category']
+        activity = flask.request.args.get('activity')
+        category = flask.request.args.get('category')
 
         entry = {
             'activity': activity,
@@ -48,9 +53,11 @@ def placeholder():
         }
 
         a.db.insert_activity(conn, entry)
+        
+        return "ok"
 
     else:
-        category = 'Blizzard'
+        category = flask.request.args.get('category')
         result = a.db.return_activity(conn, category)
 
         jresult = {

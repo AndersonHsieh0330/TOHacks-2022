@@ -19,11 +19,11 @@ def init_db(conn):
             "CREATE TABLE IF NOT EXISTS activities (activity STRING PRIMARY KEY, category STRING)"
         )
         cur.execute(
-            "UPSERT INTO activities (activity, category) VALUES ('Hiking', 'Blizzard')")
+            "UPSERT INTO activities (activity, category) VALUES ('Hiking', 'sun')")
         cur.execute(
             "UPSERT INTO activities (activity, category) VALUES ('Not Hiking', 'Any Other Weather')")
         cur.execute(
-            "UPSERT INTO activities (activity, category) VALUES ('Flying', 'Blizzard')")
+            "UPSERT INTO activities (activity, category) VALUES ('Flying', 'sun')")
         logging.debug("init_db(): status message: %s",
                       cur.statusmessage)
     conn.commit()

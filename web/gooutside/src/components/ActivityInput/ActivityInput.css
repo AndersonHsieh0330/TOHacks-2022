@@ -9,6 +9,7 @@
   margin-top: 10vh;
   margin-left: 26vw;
   border: 2px solid #dab692;
+  z-index: 10000;
 }
 #ActivityInput {
   background-color: #00000000;
@@ -29,4 +30,18 @@
 
 ::placeholder {
   color: #dab692;
+}
+
+#SunnyAfterPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#TryAgainBTN {
+  width: 15vw;
+  position: absolute;
+  bottom: 6vh;
+  right: 15vw;
+  z-index: 1000;
 }
