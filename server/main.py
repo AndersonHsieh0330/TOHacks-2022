@@ -19,26 +19,15 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-opt = a.db.parse_cmdline()
-logging.basicConfig(level=logging.DEBUG if opt.verbose else logging.INFO)
+conn = psycopg2.connect("postgresql://go-outside:xG_I9M5Y5H7Nzpyj0IMeWg@free-tier9.gcp-us-west2.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dgo-outside-db-559")
 
-try:
-    # Attempt to connect to cluster with connection string provided to
-    # script. By default, this script uses the value saved to the
-    # DATABASE_URL environment variable.
-    # For information on supported connection string formats, see
-    # https://www.cockroachlabs.com/docs/stable/connect-to-the-database.html.
-    db_url = opt.dsn
-    conn = psycopg2.connect(db_url)
-except Exception as e:
-    logging.fatal("Database connection failed")
-    logging.fatal(e)
-
+a.db.init_db(conn)
+a.db.print_activities(conn)
 
 @app.route("/")
 @cross_origin()
 def index():
-    pass
+    return render_template('index.html')
 
 @app.route("/api/activity", methods=["GET", "POST"])
 @cross_origin()
@@ -67,11 +56,27 @@ def placeholder():
 
         return jresult
 
-    # return redirect(url_for(DEFAULT_ROUTE_LEADERBOARD))
-    # return render_template("player.html", score = score, avatars = avatars)
-
 
 if __name__ == '__main__':
+
+    opt = a.db.parse_cmdline()
+    logging.basicConfig(level=logging.DEBUG if opt.verbose else logging.INFO)
+
+    try:
+        # Attempt to connect to cluster with connection string provided to
+        # script. By default, this script uses the value saved to the
+        # DATABASE_URL environment variable.
+        # For information on supported connection string formats, see
+        # https://www.cockroachlabs.com/docs/stable/connect-to-the-database.html.
+        
+        # db_url = opt.dsn
+        # conn = psycopg2.connect(db_url)
+        conn = psycopg2.connect("postgresql://go-outside:xG_I9M5Y5H7Nzpyj0IMeWg@free-tier9.gcp-us-west2.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dgo-outside-db-559")
+    except Exception as e:
+        logging.fatal("Database connection failed")
+        logging.fatal(e)
+
     a.db.init_db(conn)
     a.db.print_activities(conn)
+
     app.run(debug=True, host="0.0.0.0", port=(8080))

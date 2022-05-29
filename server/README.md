@@ -1,9 +1,9 @@
-Python 3.7+
+Install Python 3.7+
 
-pip install pipenv
+sudo apt-get pip
 
-pipenv install
+pip install -r requirements.txt
 
-pipenv run server.py
+python main.py
 
 enjoy
